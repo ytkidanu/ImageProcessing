@@ -1,2 +1,1 @@
-# Image Processing
-Project 3 for group 11
+# Image Processing TEAM SBT (group 11)
