@@ -10,10 +10,18 @@
 
 **Google Colab**: The cloud-based platform used for running Jupyter notebooks, particularly for data cleaning.
 
-**Rivanna**: This UVA based platform enabled us 
+**Rivanna**: This UVA based high performance system platform enabled us to have suffiecent memory to run download our image data and conduct analysis on it to build our model. More information can be found here: https://www.rc.virginia.edu/userinfo/hpc/
 
-  
+
 ### Add-on Packages:
+
+**Matplotlib** 
+**Tensorflow**
+**tensorflow_datasets**
+**Counter**
+**Random**
+
+
 
 ### Platform:
 - **Mac** and **Windows**: These operating systems were used during development.
@@ -23,14 +31,17 @@
 
 **DS-4002-GROUP-PROJECTS**
 - DATA (main folder)
-
+  - Cleaning_Dataset_and_Pre_model_Visualizations.ipynb
+  - Data_Appendix.md
+  - Obtaining_Plant_village_data_works.ipynb
+  - balancing_augmenting_graphing(1).ipynb
+  - tomato_balanced1
 - OUTPUT (main folder)
-  
+  - 
 - SCRIPTS (main folder)
-
+  -
 - LICENSE.md
 - README.md
-
 
 ## Section 3: Instructions for reproducing our results. 
 
