@@ -3,6 +3,10 @@
 ## Section 1: Software and Platform Used
 
 ### Software:
+
+Python: This is the primary programming language used
+Google Colab: The cloud-based platform used for running Jupyter notebooks, particularly for data cleaning.
+
   
 ### Add-on Packages:
 
