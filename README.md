@@ -4,8 +4,10 @@
 
 ### Software:
 
-Python: This is the primary programming language used
-Google Colab: The cloud-based platform used for running Jupyter notebooks, particularly for data cleaning.
+**Python**: This is the primary programming language used for this project.
+**TensorFlow**: This software library was used to support the neural network models we build for data analysis.
+**Google Colab**: The cloud-based platform used for running Jupyter notebooks, particularly for data cleaning.
+**Rivanna**
 
   
 ### Add-on Packages:
