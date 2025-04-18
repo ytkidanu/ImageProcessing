@@ -16,33 +16,12 @@
 ### Add-on Packages:
 
 - **Matplotlib**: This package is to create visualization of the tomato images and EDA plots.
-- **Tensorflow**: This package is to used to provide high performance numerical computing for our image data
+- **Tensorflow**: This package is to used to provide high performance numerical computing for our image data and perfom modeling
 - **tensorflow_datasets**: This package is used to provide access to the dataset
-- **counter**: This is used to provide a tally and provide a count of the number of images and labels
-- **random**: This is used to randomize the images selected within each class to equal 373
 - **Numpy**: This package is used for numerical operations with arrays
 - **Pandas**: This packages is used for working with the data to make it clean and ready for use for further analysis.
-- **defaultdict**: This is used for to account for missing data in dictionaries
-- **train_test_split**: This is used for to divide our data into training and test set
-- **StandardScaler**: This is used to standarized our data when training our models
-- **LinearSVC**: This is used to build our SVM model for further evaluation
-- **confustion_matrix**: This is used to create a confusion matrix to asses how accurate the SVM model is.
-- **classification_report**: This is used to provide a summary of how the model did with classification of the images
-- **accuracy_score**: This is used to calculate and determine how accurate the model is
+- **Scikit-learn**: This is used to build our SVM model and create a confusion matrix to asses how accurate the SVM model is 
 - **seaborn**: This package is used to create visualization of the evaluation of how the SVM model performed for classification
-- **set_random_seed**:
-- **Sequential**:
-- **Flatten, Dense, dropout**:
-- **ResNet50**:
-- **ModelCheckpoint, EarlyStopping, ReduceLROnPlateau**:
-- **VGG19**:
-- **InceptionV3**:
-- **SVC**:
-- **GridSearchCV**:
-- **svm**:
-- **PCA**:
-
-
 
 ### Platform:
 - **Mac** and **Windows**: These operating systems were used during development. 
@@ -59,8 +38,12 @@
   - balancing_augmenting_graphing(1).ipynb
   - tomato_balanced1
 - OUTPUT (main folder)
-  - hi! 
+  - ResNet50_Loss_over_epochs.png
+  - ResNet50_Matrix.png
+  - SVM_matrix.png
+  - VGG19_Loss_over_Epoch.png
 - SCRIPTS (main folder)
+  - DATA_BALANCED_CNN_and_SVM.ipynb
   - Model SVM.ipynb
   - Model SVM_518_seed.ipynb
 - LICENSE.md
