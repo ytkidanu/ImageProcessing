@@ -21,9 +21,8 @@
 - **counter**: This is used to provide a tally and provide a count of the number of images and labels
 - **random**: This is used to randomize the images selected within each class to equal 373
 - **Numpy**: This package is used for numerical operations with arrays
-- **Pandas**: 
+- **Pandas**: This packages is used for working with the data to make it clean and ready for use for further analysis.
 - **defaultdict**: This is used for to account for missing data in dictionaries
-- **gdown**: This package is used to access files that are on Google Drive
 - **train_test_split**: This is used for to divide our data into training and test set
 - **StandardScaler**: This is used to standarized our data when training our models
 - **LinearSVC**: This is used to build our SVM model for further evaluation
@@ -31,6 +30,17 @@
 - **classification_report**: This is used to provide a summary of how the model did with classification of the images
 - **accuracy_score**: This is used to calculate and determine how accurate the model is
 - **seaborn**: This package is used to create visualization of the evaluation of how the SVM model performed for classification
+- **set_random_seed**:
+- **Sequential**:
+- **Flatten, Dense, dropout**:
+- **ResNet50**:
+- **ModelCheckpoint, EarlyStopping, ReduceLROnPlateau**:
+- **VGG19**:
+- **InceptionV3**:
+- **SVC**:
+- **GridSearchCV**:
+- **svm**:
+- **PCA**:
 
 
 
@@ -71,7 +81,7 @@ Following downloading the data, we used Matplotlib and Pandas to display the ima
 **Only Retaining the Tomato Plant Images and Labels**:
 After loading in the data, we then pulled metadata about the plant village dataset and stored it into 'info' in order to get an understanding of how to clean this dataset to suit our research question and goal. We saved all label names of the different plant image categories into a variable named label_names and printed this variable to see which labels were the tomato ones. The tomato labels are: 28: Tomato___Bacterial_spot, 29: Tomato___Early_blight, 30: Tomato___healthy ,31: Tomato___Late_blight, 32: Tomato___Leaf_Mold, 33: Tomato___Septoria_leaf_spot, 34: Tomato___Spider_mites Two-spotted_spider_mite, 35: Tomato___Target_Spot, 36: Tomato___Tomato_mosaic_virus, 37: Tomato___Tomato_Yellow_Leaf_Curl_Virus.
 
-These identified tomato labels were then saved as classes into a variable named tomato_classes. Further, we also saved the indices associated with each tomato class into a variable named tomato_label_indices. It is important to make sure here that the labels indicies are in the form of an integer. We created a function that filters through the various tomato images in each class and documents a true or false depending on if that tomato class matches a tomato_label_indices value.
+These identified tomato labels were then saved as classes into a variable named tomato_classes. Further, we also saved the indices associated with each tomato class into a variable named tomato_label_indices. It is important to make sure here that the labels indicies are in the form of an integer. We created a function that filters through the various tomato images in each class and documents a true or false depending on if that tomato class matches a tomato_label_indices value and saved into a variable named tomato_dataset.
 Subsequently, we created a dataset that contains only images and label pair that correspond to being a tomato plant leaf image.
 
 In order to ensure that this dataset contain the right impages, we then used Matplotlib to visualize these images with their label names.
@@ -83,16 +93,38 @@ We then created a variable named label_names and populated that with all the tom
 
 **Balancing the Classes**:
 
-In order to balance the classes to ensure that they all have the same number of images for modeling
+In order to balance the classes to ensure that they all have the same number of images for modeling, a blank set named class_counts was created and Counter was used to irterate through the tomato_dataset in a for loop to tally how many images were in each label. Following this, a min_tomato variable was created to store that the minimum images count among the classes was 373 (from Tomato_Tomato_mosaic_virus). We created a blank dictionary named class_samples that will be populated by a for loop that is convering our tomato_dataset into Numpy and placing our image and label pairs into it.
+An empty tomato_balanced list is then populated with a values from a for loop where each class will be randomly sampled so that random images are chosen so it matches the minimum number of 373 images in each class. Next, to prepare for training our models, the list of image and label pairs are randomized so that the training model does not have as much bias.
 
 ### Build CNN Model
-**Access the Chicago Data Portal**:
+
+In order to build the CNN model, all the images in the balanced dataset were first resized to 224x224 pixels. This is the common dimension for ResNet-50 model, VGG-19 models, and InceptionV3. The images were also preprocessed, shuffled and batched. This ensures that our data is properly optimized for building our models.
+
+**ResNet-50 Model**:
+The first step is to create empty list for our images and label: image_list and label_list. Then we used a for loop to convert and flatten our dataset into the image and label pairs they were in before, convert all of these images and labels into a Numpy array, and populate our image_list and label_list, respectively. These list were then transformed and saved into numpy arrays as images_np and labels_np. Next, this data was split into a 80% train and 20 temporary split. The 80% will be used to train the model while the 20% will be used to split for validation and test.
+Following this, we created tensorflow datasets from our x train and y train, x val and y val, and x test and y test variables. These newly created dataset were then batched. An instance named datagen was utilzied to apply random transformations to augment our data as the model is trained, with this being standarized. We then shifted our old labels from 28 - 37 to 0-0 and applied these labels to our y train, y val, and y test. Next, we mapped these new labels on to the corresponindg tomato class labels in the tensor dataset. 
+
+Following this, we then build our ResNet-50 model with 10 output classes and trained it with the tensorflow training dataset. A validation tensorflow dataset was also created from the mapped y_val.
+We then ploted training and validation losses over various epochs to see how the model performs over time.
+
+ModelCheckpoint and Earlystopping are also employed as callback to evaluate our model, ensure that the best model is chosen, and not overtrain the model. 
+
+**VGG-19 Model**:
+This model is loaded in and the model layer weights are frozen so that the layer paramerter do not change while the model is training, slowing it down. With the prior model setting up all the aspect we need to build our model, the VGG-19 model uses the same tensorflow training mapped dataset and validation tensorflow mapped dataset.
+
+ModelCheckpoint and Earlystopping are also employed as callback to evaluate our model, ensure that the best model is chosen, and not overtrain the model. 
+
+**InceptionV3 Model**:
+This model is loaded in and the model layer weights here are also frozen so that the layer parameters do not change while the model is training. With the prior models setting up all the aspect we need to build our model, this model uses the same tensorflow training mapped dataset and validation tensorflow mapped dataset.
+
+ModelCheckpoint and Earlystopping are also employed as callback to evaluate our model, ensure that the best model is chosen, and not overtrain the model. 
 
 ### Build SVM Model
-**Access the Chicago Data Portal**:
+To begin, we combined our previsouly seperate x_test and x_val into one set and do the same for the y_test and y_val values. Further, our x_train and x_test arrays are flattened. This makes it so that row represent an image whereas the column is a pixel from that image. Following this, the x_train and x_test flatten arrays are scaled and standarized to ensure this data has the appropriate requirements to run a SVM model. 
+Principal component analysis (PCA) is employed in order to reduce the dimentsion of the image data to reduce the computational load. Next, we employed GridSearchCV to determine the parameters (C, gamma, and kernel) that would ensure we get the best fit of our data for the model. Using those values and the x_train and y_train that underwent PCA, we built our final model.
 
 ### Evaluation Metrics for Each Model
-**Access the Chicago Data Portal**:
+In order to evaluate and compare how each model did classifiying tomato images, confusion matrices with heatmaps were generated for each model to visually represent how y_test values did compared to y_true values. Addtionally, classficication reports are calculated to see how well the model did at predicting for each class. It provides information how often the model correctly classifified a class and how times it was able to document how many of the images for each class the model was able to correctly classify. Comparing how each models did for each class, with higher precision and recall values indicating a better fit model. Overall model accuracy scores will also be calulated and compared between the models to determine which one has the highest accuracy and is therefore a better model for tomato leaf image classifaction.
 
 
 ## Section 4: References
